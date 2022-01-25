@@ -5,9 +5,9 @@
 - 当主库宕掉的时候,orchestrator不仅会每隔InstancePollSeconds(默认五秒)监测主库，也会检测从库(通过select round(absolute_lag) from meta.heartbeat_view"检查,配置文件里自定义语句)。比如，要诊断出主库挂了的情况，必须满足以下两个条件：orchestrator联系不到主库。登录到主库对应的从库，从库也连不上主库。
 - 使用伪GTID的时候需要建一个表专门存放orchestrator生成的GTID,每次写入binlog的话会把这个表的GTID写进去,如下图
 
-![1643075087959]https://caixin.ink/2022/01/04/Orchestrator-MySQL/1643075087959.png)
+![1643075087959](D:\zxt\Desktop\mysql 高可用\Orchestrator-MySQL\Orchestrator-MySQL.assets\1643075087959.png)
 
-![1643075108838]https://caixin.ink/2022/01/04/Orchestrator-MySQL/1643075108838.png)
+![1643075108838](D:\zxt\Desktop\mysql 高可用\Orchestrator-MySQL\Orchestrator-MySQL.assets\1643075108838.png)
 
 - orchestrator没有将错误按时间来进行分类，而是按复制拓扑服务器本身进行分类。当所有的从库都连不上主库的时候，说明复制拓扑被破坏，进行故障转移。
 - 通过show slave hosts;命令发现实例,然后根据host:port访问实例
@@ -27,7 +27,7 @@
 >* 5.6: I/O thread同步并发线程是以库级别并行的,也就是说两个库可以并行两个线程,三个库可以并行三个线程,但是注意一个库不要开启并行,影响性能.而且就算开启也会存在slave同步延迟
 >* 5.7: I/O thread同步并发线程可以做到按行级别并行,线程数量一般与CPU数量一样,可以做到slave节点无延迟,slave_parallel_workers=4,slave_parallel_type=LOGICAL_CLOCK,这两个参数一定要加上
 
-![1643075293181]https://caixin.ink/2022/01/04/Orchestrator-MySQL/1643075293181.png)
+![1643075293181](D:\zxt\Desktop\mysql 高可用\Orchestrator-MySQL\Orchestrator-MySQL.assets\1643075293181.png)
 
 ## 先上总结:
 
@@ -200,13 +200,13 @@ systemctl enable orchestrator
 没问题的话访问http://ip:3000/
 添加服务
 
-![1643077735274]https://caixin.ink/2022/01/04/Orchestrator-MySQL/1643077735274.png)
+![1643077735274](D:\zxt\Desktop\mysql 高可用\Orchestrator-MySQL\Orchestrator-MySQL.assets\1643077735274.png)
 
-![1643077940976]https://caixin.ink/2022/01/04/Orchestrator-MySQL/1643077940976.png)
+![1643077940976](D:\zxt\Desktop\mysql 高可用\Orchestrator-MySQL\Orchestrator-MySQL.assets\1643077940976.png)
 
 查看
 
-![1643077909835]https://caixin.ink/2022/01/04/Orchestrator-MySQL/1643077909835.png)
+![1643077909835](D:\zxt\Desktop\mysql 高可用\Orchestrator-MySQL\Orchestrator-MySQL.assets\1643077909835.png)
 
 ## 测试故障转移
 
@@ -214,15 +214,15 @@ systemctl enable orchestrator
 
 orchestrator上显示master断开
 
-![1643077816765]https://caixin.ink/2022/01/04/Orchestrator-MySQL/1643077816765.png)
+![1643077816765](D:\zxt\Desktop\mysql 高可用\Orchestrator-MySQL\Orchestrator-MySQL.assets\1643077816765.png)
 
 ## orchestrator显示切换信息
 
-![1643078029401]https://caixin.ink/2022/01/04/Orchestrator-MySQL/1643078029401.png)
+![1643078029401](D:\zxt\Desktop\mysql 高可用\Orchestrator-MySQL\Orchestrator-MySQL.assets\1643078029401.png)
 
 可以看到切换详情
 
-![1643078108495]https://caixin.ink/2022/01/04/Orchestrator-MySQL/1643078108495.png)
+![1643078108495](D:\zxt\Desktop\mysql 高可用\Orchestrator-MySQL\Orchestrator-MySQL.assets\1643078108495.png)
 
 老master节点正常启动后
 
@@ -234,4 +234,4 @@ START SLAVE;
 
 查看最新拓扑图
 
-![1643078141329]https://caixin.ink/2022/01/04/Orchestrator-MySQL/1643078141329.png)
+![1643078141329](D:\zxt\Desktop\mysql 高可用\Orchestrator-MySQL\Orchestrator-MySQL.assets\1643078141329.png)

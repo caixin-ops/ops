@@ -1,0 +1,177 @@
+{
+  "Debug": true,
+  "EnableSyslog": false,
+  "ListenAddress": "10.1.1.1:3000",
+  "MySQLTopologyCredentialsConfigFile": "",
+  "MySQLTopologyUser": "orchestrator",
+  "MySQLTopologyPassword": "qweasd",
+  "MySQLTopologySSLPrivateKeyFile": "",
+  "MySQLTopologySSLCertFile": "",
+  "MySQLTopologySSLCAFile": "",
+  "MySQLTopologySSLSkipVerify": true,
+  "MySQLTopologyUseMutualTLS": false,
+  "MySQLTopologyMaxPoolConnections": 3,
+  "MySQLOrchestratorHost": "10.1.1.1",
+  "MySQLOrchestratorPort": 3307,
+  "MySQLOrchestratorDatabase": "orchestrator",
+  "MySQLOrchestratorUser": "orchestrator_srv",
+  "MySQLOrchestratorPassword": "qweasd",
+  "MySQLOrchestratorCredentialsConfigFile": "",
+  "MySQLOrchestratorSSLPrivateKeyFile": "",
+  "MySQLOrchestratorSSLCertFile": "",
+  "MySQLOrchestratorSSLCAFile": "",
+  "MySQLOrchestratorSSLSkipVerify": true,
+  "MySQLOrchestratorUseMutualTLS": false,
+  "MySQLConnectTimeoutSeconds": 1,
+  "DefaultInstancePort": 3306,
+  "ReplicationLagQuery": "select round(absolute_lag) from meta.heartbeat_view",
+  "SlaveStartPostWaitMilliseconds": 1000,
+  "DiscoverByShowSlaveHosts": true,
+  "InstancePollSeconds": 5,
+  "AutoPseudoGTID": true,
+  "ReadLongRunningQueries": false,
+  "SkipMaxScaleCheck": false,
+  "BinlogFileHistoryDays": 10,
+  "UnseenInstanceForgetHours": 240,
+  "SnapshotTopologiesIntervalHours": 0,
+  "InstanceBulkOperationsWaitTimeoutSeconds": 10,
+  "ActiveNodeExpireSeconds": 5,
+  "HostnameResolveMethod": "default",
+  "MySQLHostnameResolveMethod": "",
+  "SkipBinlogServerUnresolveCheck": true,
+  "ExpiryHostnameResolvesMinutes": 1,
+  "RejectHostnameResolvePattern": "",
+  "ReasonableReplicationLagSeconds": 10,
+  "ProblemIgnoreHostnameFilters": [
+
+  ],
+  "VerifyReplicationFilters": false,
+  "MaintenanceOwner": "orchestrator",
+  "ReasonableMaintenanceReplicationLagSeconds": 20,
+  "MaintenanceExpireMinutes": 10,
+  "MaintenancePurgeDays": 365,
+  "CandidateInstanceExpireMinutes": 60,
+  "AuditLogFile": "",
+  "AuditToSyslog": false,
+  "AuditPageSize": 20,
+  "AuditPurgeDays": 365,
+  "RemoveTextFromHostnameDisplay": ":3306",
+  "ReadOnly": false,
+  "AuthenticationMethod": "",
+  "HTTPAuthUser": "",
+  "HTTPAuthPassword": "",
+  "AuthUserHeader": "",
+  "PowerAuthUsers": [
+    "*"
+  ],
+  "ClusterNameToAlias": {
+    "127.0.0.1": "test suite"
+  },
+  "AccessTokenUseExpirySeconds": 60,
+  "AccessTokenExpiryMinutes": 1440,
+  "DetectClusterAliasQuery": "select ifnull(max(cluster_name), '') as cluster_alias from meta.cluster where anchor=1",
+  "DetectClusterDomainQuery": "",
+  "DataCenterPattern": "",
+  "DetectDataCenterQuery": "select 'redacted'",
+  "PhysicalEnvironmentPattern": "",
+  "PromotionIgnoreHostnameFilters": [
+
+  ],
+  "ServeAgentsHttp": false,
+  "UseSSL": false,
+  "UseMutualTLS": false,
+  "SSLSkipVerify": false,
+  "SSLPrivateKeyFile": "",
+  "SSLCertFile": "",
+  "SSLCAFile": "",
+  "SSLValidOUs": [
+
+  ],
+  "StatusEndpoint": "/api/status",
+  "StatusSimpleHealth": true,
+  "StatusOUVerify": false,
+  "HttpTimeoutSeconds": 60,
+  "StaleSeedFailMinutes": 60,
+  "SeedAcceptableBytesDiff": 8192,
+  "SeedWaitSecondsBeforeSend": 2,
+  "BinlogEventsChunkSize": 10000,
+  "BufferBinlogEvents": true,
+  "SkipBinlogEventsContaining": [
+    "@@SESSION.GTID_NEXT= 'ANONYMOUS'"
+  ],
+  "ReduceReplicationAnalysisCount": false,
+  "FailureDetectionPeriodBlockMinutes": 60,
+  "RecoveryPeriodBlockSeconds": 600,
+  "RecoveryIgnoreHostnameFilters": [
+
+  ],
+  "RecoverMasterClusterFilters": [
+    "*"
+  ],
+  "RecoverIntermediateMasterClusterFilters": [
+    "*"
+  ],
+  "OnFailureDetectionProcesses": [
+    "echo '②  Detected {failureType} on {failureCluster}. Affected replicas: {countSlaves}' >> /tmp/recovery.log"
+  ],
+  "PreGracefulTakeoverProcesses": [
+    "echo '①   Planned takeover about to take place on {failureCluster}. Master will switch to read_only' >> /tmp/recovery.log"
+  ],
+  "PreFailoverProcesses": [
+    "echo '③  Will recover from {failureType} on {failureCluster}' >> /tmp/recovery.log"
+  ],
+  "PostMasterFailoverProcesses": [
+    "echo '④  Recovered from {failureType} on {failureCluster}. Failed: {failedHost}:{failedPort}; Promoted: {successorHost}:{successorPort}' >> /tmp/re
+covery.log"
+  ],
+  "PostFailoverProcesses": [
+    "echo '⑤  (for all types) Recovered from {failureType} on {failureCluster}. Failed: {failedHost}:{failedPort}; Successor: {successorHost}:{successor
+Port}' >> /tmp/recovery.log"
+  ],
+  "PostUnsuccessfulFailoverProcesses": [
+    "echo '⑧  >> /tmp/recovery.log'"
+  ],
+  "PostIntermediateMasterFailoverProcesses": [
+    "echo '⑥ Recovered from {failureType} on {failureCluster}. Failed: {failedHost}:{failedPort}; Successor: {successorHost}:{successorPort}' >> /tmp/re
+covery.log"
+  ],
+  "PostGracefulTakeoverProcesses": [
+    "echo '⑦ Planned takeover complete' >> /tmp/recovery.log"
+  ],
+  "PostMasterFailoverProcesses": [
+    "/data/orchestrator/redacted/do-something # e.g. kick pt-heartbeat on promoted master"
+  ],
+  "PostIntermediateMasterFailoverProcesses": [
+  ],
+  "PostGracefulTakeoverProcesses": [
+    "echo 'Planned takeover complete' >> /tmp/recovery.log"
+  ],
+  "CoMasterRecoveryMustPromoteOtherCoMaster": true,
+  "DetachLostSlavesAfterMasterFailover": true,
+  "ApplyMySQLPromotionAfterMasterFailover": true,
+  "PreventCrossDataCenterMasterFailover": false,
+  "PreventCrossRegionMasterFailover": false,
+  "MasterFailoverLostInstancesDowntimeMinutes": 60,
+  "PostponeReplicaRecoveryOnLagMinutes": 10,
+  "OSCIgnoreHostnameFilters": [
+
+  ],
+  "GraphitePollSeconds": 60,
+  "GraphiteAddr": "",
+  "GraphitePath": "",
+  "GraphiteConvertHostnameDotsToUnderscores": true,
+  "BackendDB": "mysql",
+  "MySQLTopologyReadTimeoutSeconds": 3,
+  "MySQLDiscoveryReadTimeoutSeconds": 3,
+  "SQLite3DataFile": "/var/lib/orchestrator/orchestrator-sqlite.db",
+  "RaftEnabled": false,
+  "RaftBind": "redacted",
+  "RaftDataDir": "/var/lib/orchestrator",
+  "DefaultRaftPort": 10008,
+  "ConsulAddress": "redacted:8500",
+  "RaftNodes": [
+    "redacted",
+    "redacted",
+    "redacted"
+  ]
+}
